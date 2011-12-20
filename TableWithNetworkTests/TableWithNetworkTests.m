@@ -3,7 +3,7 @@
 //  TableWithNetworkTests
 //
 //  Created by Myungjin Choi on 11. 12. 19..
-//  Copyright (c) 2011년 Insol. All rights reserved.
+//  Copyright (c) 2011년 KTH. All rights reserved.
 //
 
 #import "TableWithNetworkTests.h"
