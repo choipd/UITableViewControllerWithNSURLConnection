@@ -38,7 +38,6 @@ NSMutableData* _data;
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
     NSLog(@"didReceiveResponse");
-
     _data = [[NSMutableData alloc] initWithCapacity:1024];
 }
 
@@ -62,10 +61,16 @@ NSMutableData* _data;
     
     NSError *myError = nil;
 
-    NSLog(@"data string = %@", [[NSString alloc] initWithData:_data encoding:NSUTF8StringEncoding]);
+//    NSLog(@"data string = %@", [[NSString alloc] initWithData:_data encoding:NSUTF8StringEncoding]);
     id result = [NSJSONSerialization JSONObjectWithData:_data options:NSJSONReadingAllowFragments error:&myError];
-    if (@selector(apiDidLoad:)) {
-        [self performSelector:@selector(apiDidLoad:) withObject:result];
+    if (result) {
+        if (@selector(apiDidLoad:)) {
+            [self performSelector:@selector(apiDidLoad:) withObject:result];
+        }        
+    } else {
+        if (@selector(apiFailed:)) {
+            [self performSelector:@selector(apiFailed:) withObject:myError];
+        }
     }
         
 #if (!__has_feature(objc_arc))    
